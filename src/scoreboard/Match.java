@@ -15,10 +15,27 @@ public class Match implements MatchInterface{
     private int matchNumber;
 
 
-    public Match(){ };
+    public Match(){ 
+        // default constructor
+    };
 
     public Match(String homeTeam, String awayTeam, int matchNumber){
         // This constructor should initialize the properties
+
+        //assigning values to the teams (Assuming data is already validated)
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+
+        //initializing match with default score
+        this.homeTeamScore = 0;
+        this.awayTeamScore = 0;
+
+        //setting match number;
+        this.matchNumber = matchNumber;
+
+        //starting match
+        this.matchInProgress = true;
+
     }
 
 
@@ -29,8 +46,17 @@ public class Match implements MatchInterface{
      */
 
     public void updateScore(int homeTeamScore, int awayTeamScore) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateScore'");
+        //checking if this match is in progress otherwise throw an error.
+        if(!matchInProgress){
+            throw new Error("MATCH NOT IN PROGRESS: This match is not in progress.");
+        } else if(homeTeamScore < 0 || awayTeamScore < 0){
+            //team score cannot be negative. Throwing an error
+            throw new Error("NEGATIVE VALUE: Team score can not be negative.");
+        } else{
+            //updating score of teams.
+            this.homeTeamScore = homeTeamScore;
+            this.awayTeamScore = awayTeamScore;
+        }
     }
 
 
@@ -38,8 +64,8 @@ public class Match implements MatchInterface{
      * @description: This method will finish an existing, in progress match.
      */
     public void finishMatch() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'finishMatch'");
+        //stopping match in progress
+        this.matchInProgress = false;
     }
 
 
@@ -48,8 +74,8 @@ public class Match implements MatchInterface{
      * @return
      */
     public int totalScore(){
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'finishMatch'");
+        //addition of both team score makes total score
+        return this.homeTeamScore + this.awayTeamScore;
     }
 
     /**
