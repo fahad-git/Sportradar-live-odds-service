@@ -9,5 +9,13 @@ public interface MatchInterface {
      void finishMatch();
 
      int totalScore();
+
+     String getHomeTeam();
+
+     String getAwayTeam();
+
+     int getHomeTeamScore();
+
+     int getAwayTeamScore();
  
 }

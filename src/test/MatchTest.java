@@ -75,7 +75,6 @@ public class MatchTest {
         assertFalse(match.isMatchInProgress());
     }
 
-
     /**
      * @TestingMethod: totalScore
      * This method tests the total score of a match.
