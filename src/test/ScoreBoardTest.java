@@ -124,11 +124,11 @@ class ScoreBoardTest {
         scoreBoard.updateScore("TeamE", "TeamF", 1, 1);
 
         List<MatchInterface> matchesInProgress = scoreBoard.matchesSummary();
-        assertEquals(2, matchesInProgress.size());
+        assertEquals(3, matchesInProgress.size());
 
         // Check the order based on total score
         assertEquals("TeamD", matchesInProgress.get(0).getAwayTeam());
-        assertEquals("TeamA", matchesInProgress.get(0).getHomeTeam());
-        assertEquals("TeamE", matchesInProgress.get(0).getHomeTeam());
+        assertEquals("TeamE", matchesInProgress.get(1).getHomeTeam());
+        assertEquals("TeamA", matchesInProgress.get(2).getHomeTeam());
     }
 }
