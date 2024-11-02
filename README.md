@@ -35,6 +35,7 @@
 5. The solution can be extended or implemented later (Scaleable).
 6. The requirement was to deliver a simple draft.
 7. User, who will use this library will manage/install dependencies on its own.
+8. The finished match will also remain in app for later analysis but not in scoreboard.
 
 ## Overview
 Live Football World Cup scoreboard library is a live matches score updates library. The major requirements of this library design were the following:

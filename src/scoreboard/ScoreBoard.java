@@ -64,8 +64,6 @@ public class ScoreBoard implements ScoreBoardInterface{
         if(existingMatch != null){
             // finish match.
             existingMatch.finishMatch();
-            // this is valid only when requirements are for permanent delete.
-            matches.remove(existingMatch);
         } else {            
             throw new Error("MATCH NOT FOUND: There is no match between these teams in progress.");
         }
