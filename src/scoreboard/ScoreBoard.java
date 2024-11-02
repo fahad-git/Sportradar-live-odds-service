@@ -1,7 +1,7 @@
 package scoreboard;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import scoreboard.Interfaces.MatchInterface;
@@ -78,7 +78,7 @@ public class ScoreBoard implements ScoreBoardInterface{
     @Override
     public List<MatchInterface> matchesSummary() {
         // creating a new list for matches in progress.
-        List<MatchInterface> matchesInProgress = new ArrayList<MatchInterface>();
+        List<MatchInterface> matchesInProgress = new ArrayList<>();
         // extracting matches in progress.
         for (MatchInterface match : matches) {
             if(match.isMatchInProgress()){
@@ -86,8 +86,11 @@ public class ScoreBoard implements ScoreBoardInterface{
             }
         }
         // sorting match in progress collection with match comparator.
-        Collections.sort(matchesInProgress, new MatchComparator());
-        return matchesInProgress;
+        return matchesInProgress.stream()
+                .sorted(
+                Comparator.comparingInt(MatchInterface::totalScore)
+                        .thenComparingInt(MatchInterface::getMatchNumber).reversed()
+                ).toList();
     }
     
 
@@ -116,12 +119,9 @@ public class ScoreBoard implements ScoreBoardInterface{
      */
 
     private MatchInterface findMatch(String homeTeam, String awayTeam) {
-        for (MatchInterface match : matches) {
-            String matchHomeTeam = match.getHomeTeam();
-            String matchAwayTeam = match.getAwayTeam();
-            if(homeTeam == matchHomeTeam && awayTeam == matchAwayTeam)
-                return match;    
+        return matches.stream()
+            .filter(match -> homeTeam.equals(match.getHomeTeam()) && awayTeam.equals(match.getAwayTeam()) && match.isMatchInProgress())
+            .findFirst()
+            .orElse(null);
         }
-        return null;
-    }
 }

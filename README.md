@@ -90,4 +90,4 @@ To use this library, you need to follow the steps below:
 
 
 ### Running Unit Tests
-There is a test runner class available to run all unit test cases of the project through JUnit. Run `TestRunner.java file to execute all test cases and it will show test case results.
+There is a test runner class available to run all unit test cases of the project through JUnit. Run `TestRunner.java` file to execute all test cases and it will show test case results.
