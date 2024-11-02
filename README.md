@@ -28,23 +28,23 @@
 
 
 ### Assumptions
-    1. There is no character limit/specifications for team names.
-    2. The team name is case-insensitive.
-    3. The matchNumber will be used to sort for teams with the same total score during the match.
-    4. The maximum number of matches can be 2147483647 (Max limit of an integer match counter).
-    5. The solution can be extended or implemented later (Scaleable).
-    6. The requirement was to deliver a simple draft.
-    7. User, who will use this library will manage/install dependencies on its own.
+1. There is no character limit/specifications for team names.
+2. The team name is case-insensitive.
+3. The matchNumber will be used to sort for teams with the same total score during the match.
+4. The maximum number of matches can be 2147483647 (Max limit of an integer match counter).
+5. The solution can be extended or implemented later (Scaleable).
+6. The requirement was to deliver a simple draft.
+7. User, who will use this library will manage/install dependencies on its own.
 
 ## Overview
 Live Football World Cup scoreboard library is a live matches score updates library. The major requirements of this library design were the following:
 
-    1. Start a new match, assuming the initial score is 0 – 0, and add it to the scoreboard. This should capture the following parameters:
-        a. Home team
-        b. Away team
-    2. Update score. This should receive a pair of absolute scores: home team score and away team score.
-    3. Finish match currently in progress. This removes a match from the scoreboard.
-    4. Get a summary of matches in progress ordered by their total score. The matches with the same total score will be returned ordered by the most recently started match in the scoreboard.
+1. Start a new match, assuming the initial score is 0 – 0, and add it to the scoreboard. This should capture the following parameters:
+    a. Home team
+    b. Away team
+2. Update score. This should receive a pair of absolute scores: home team score and away team score.
+3. Finish match currently in progress. This removes a match from the scoreboard.
+4. Get a summary of matches in progress ordered by their total score. The matches with the same total score will be returned ordered by the most recently started match in the scoreboard.
 
 This library is designed to fulfill these requirements.
 
