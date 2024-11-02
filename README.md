@@ -54,20 +54,40 @@ To execute this reporsitory, you need to download `junit-platform-console-standa
 
 ### Usage
 To use this library, you need to follow the steps below:
+
     1. Clone the repository.
     2. Download the JUnit JAR file from maven repository.
     3. Create `/lib` directory on you root of project and add JAR file into this directory.
     4. Create an instance of `ScoreBoard` class.
-        ```ScoreBoardInterface scoreboard = new ScoreBoard();```
+
+        ```JAVA
+        ScoreBoardInterface scoreboard = new ScoreBoard();
+        ```
+
     5. To start a match, use the `startMatch(TeamA, TeamB)` method.
-        ```scoreboard.startMatch("Germany", "Canada")```
+
+        ```JAVA
+        scoreboard.startMatch("Germany", "Canada");
+        ```
+
     6. To update score of a match in progress use `updateScore(scoreA, scoreB)` method.
-        ```scoreboard.updateScore(2, 3)```
+
+        ```JAVA
+        scoreboard.updateScore(2, 3);
+        ```
+    
     7. To finish a match, use `finishMatch()` method.
-        ```scoreboard.finishMatch()```
+    
+        ```JAVA
+        scoreboard.finishMatch();
+        ```
+    
     8. To retrieve summary of all matches in progress sort my match total score use `matchesSummary()` method.
-        ```scoreboard.matchesSummary()```
+    
+        ```JAVA
+        scoreboard.matchesSummary();
+        ```
 
 
 ### Running Unit Tests
-There is a runnable class available to run all unit test cases of project through JUnit.
+There is a test runner class available to run all unit test cases of project through JUnit. Run `TestRunner.java file to execute all test cases and it will show test cases results.
