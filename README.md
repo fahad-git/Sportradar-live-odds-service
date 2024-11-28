@@ -1,94 +1,92 @@
-# Sportradar-live-odds-service
+# Sportradar Live Odds Service
 
-## Project Understanding:
+This project is a **Live Football World Cup Scoreboard Library** designed to manage and display ongoing football matches and their scores. It provides functionalities to start new matches, update scores, finish matches, and retrieve a summary of matches in progress, sorted by their total scores.
 
-### Live Football World Cup Scoreboard library: 
-- Live Scores.
-- Start New Match (Teams Home & Away) -> Default score 0-0.
-- Update Score (Receive scores x, y and update Home -> x and Away -> y).
-- Finish in progress match (matchInProgress = False) -> Remove from scoreboard.
-- Summary of Scores (Sort in place based on total match score).
+---
 
-### Entities
-  - **Match**
-      - homeTeam
-      - awayTeam
-      - homeTeamScore
-      - awayTeamScore
-      - matchInProgress
-      - StartMatch()
-      - UpdateMatch()
-      - finishMatch()
-  - **ScoreBoard**
-      - matches[]
-      - StartMatch()
-      - UpdateMatch()
-      - finishMatch()
-      - matchSummary()
+## Features
 
+- **Live Scores:** Track and display real-time scores of ongoing football matches.
+- **Start New Match:** Initialize a new match with home and away teams, starting with a default score of 0-0.
+- **Update Score:** Update the scores for both home and away teams during a match.
+- **Finish Match:** Mark a match as finished and remove it from the active scoreboard.
+- **Match Summary:** Retrieve a summary of all matches in progress, sorted by total match score.
 
-### Assumptions
-1. There is no character limit/specifications for team names.
-2. The team name is case-insensitive.
-3. The matchNumber will be used to sort for teams with the same total score during the match.
-4. The maximum number of matches can be 2147483647 (Max limit of an integer match counter).
-5. The solution can be extended or implemented later (Scaleable).
-6. The requirement was to deliver a simple draft.
-7. User, who will use this library will manage/install dependencies on its own.
-8. The finished match will also remain in app for later analysis but not in scoreboard.
+---
 
-## Overview
-Live Football World Cup scoreboard library is a live matches score updates library. The major requirements of this library design were the following:
+## Updated Usage
 
-1. Start a new match, assuming the initial score is 0 – 0, and add it to the scoreboard. This should capture the following parameters:
-    a. Home team
-    b. Away team
-2. Update score. This should receive a pair of absolute scores: home team score and away team score.
-3. Finish match currently in progress. This removes a match from the scoreboard.
-4. Get a summary of matches in progress ordered by their total score. The matches with the same total score will be returned ordered by the most recently started match in the scoreboard.
+### Create an Instance of `ScoreBoard`
 
-This library is designed to fulfill these requirements.
+To begin using the library, create an instance of the `ScoreBoard` class.
 
-### Downloading Library
-To execute this repository, you need to download `junit-platform-console-standalone-1.11.3.jar` file and add it to the /lib directory on the root of the project. This JAR file can be downloaded from the following link:
-`https://mvnrepository.com/artifact/org.junit.platform/junit-platform-console-standalone/1.11.3`
+```java
+ScoreBoardInterface scoreboard = new ScoreBoard();
+```
 
-### Usage
-To use this library, you need to follow the steps below:
+### Start a New Match
 
-1. Clone the repository.
-2. Download the JUnit JAR file from the Maven repository.
-3. Create a `/lib` directory on the root of the project and add a JAR file into this directory.
-4. Create an instance of `ScoreBoard` class.
+Start a new match by providing the home and away team names.
 
-    ```JAVA
-    ScoreBoardInterface scoreboard = new ScoreBoard();
-    ```
+```java
+scoreboard.startMatch("Germany", "Canada");
+```
 
-5. To start a match, use the `startMatch(TeamA, TeamB)` method.
+### Update the Score of an Ongoing Match
 
-    ```JAVA
-    scoreboard.startMatch("Germany", "Canada");
-    ```
+To update the score of an ongoing match, use the `updateScore` method. Pass the names of the home and away teams, along with their updated scores.
 
-6. To update the score of a match in progress use `updateScore(scoreA, scoreB)` method.
+```java
+scoreboard.updateScore("Germany", "Canada", 2, 3);
+```
 
-    ```JAVA
-    scoreboard.updateScore(2, 3);
-    ```
+**Parameters:**
+- `homeTeam`: The name of the home team (case-insensitive).
+- `awayTeam`: The name of the away team (case-insensitive).
+- `homeScore`: The updated score for the home team (must be a non-negative integer).
+- `awayScore`: The updated score for the away team (must be a non-negative integer).
 
-7. To finish a match, use `finishMatch()` method.
+**Important Notes:**
+- The team names must match those used when starting the match.
+- Ensure that the match is active before updating scores.
 
-    ```JAVA
-    scoreboard.finishMatch();
-    ```
+### Finish a Match
 
-8. To retrieve a summary of all matches in progress sort my match total score using `matchesSummary()` method.
+To mark a match as finished, use the `finishMatch` method. Pass the names of the home and away teams.
 
-    ```JAVA
-    scoreboard.matchesSummary();
-    ```
+```java
+scoreboard.finishMatch("Germany", "Canada");
+```
 
+**Parameters:**
+- `homeTeam`: The name of the home team (case-insensitive).
+- `awayTeam`: The name of the away team (case-insensitive).
 
-### Running Unit Tests
-There is a test runner class available to run all unit test cases of the project through JUnit. Run `TestRunner.java` file to execute all test cases and it will show test case results.
+**Outcome:**
+- The match is removed from the active scoreboard.
+
+### Retrieve a Summary of Matches in Progress
+
+To retrieve a summary of all ongoing matches, sorted by total score, use the `matchesSummary` method.
+
+```java
+List<Match> summary = scoreboard.matchesSummary();
+```
+
+**Output:**
+- A list of `Match` objects representing ongoing matches, sorted by total score in descending order. Matches with the same score are displayed in the order they were added.
+
+---
+
+## Running Unit Tests
+
+To execute all unit test cases using JUnit:
+
+1. **Run `TestRunner.java`:**
+
+   ```bash
+   javac -cp "lib/junit-platform-console-standalone-1.11.3.jar:src" src/TestRunner.java
+   java -cp "lib/junit-platform-console-standalone-1.11.3.jar:src" TestRunner
+   ```
+
+This will execute all test cases and display the results.
